@@ -1,2 +1,2 @@
-# Interview-Bit-Codes
-my code
+# Interview Bit Codes
+my codes 
