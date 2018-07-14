@@ -1,0 +1,60 @@
+//Reverse Link List II//35 min
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+ListNode* Solution::reverseBetween(ListNode* A, int B, int C) {
+    if(A==NULL||A->next==NULL) return A;
+    if(B==C) return A;
+    //if(C-B==1) return A;
+    ListNode* temp=A;
+    int idx=1;
+    while(temp!=NULL&&idx<B-1)
+    {
+        temp=temp->next;
+        idx++;
+    }
+    ListNode* nodeOne=temp;
+    ListNode* prev;
+    ListNode* rev;
+    ListNode* curr;
+    if(B==1) 
+    {
+        prev=NULL;
+        curr=temp;
+        rev =temp->next;
+    }         
+    else
+    {   
+        prev      =temp;
+        curr      =temp->next;
+        rev       =temp->next->next;
+    }
+    idx=B;
+    while(idx<=C)
+    {
+        curr->next=prev;
+        prev=curr;
+        curr=rev;
+        if(rev!=NULL)
+            rev=rev->next;
+        else
+            break;
+        idx++;
+    }
+    if(B==1)
+    {
+        temp->next=curr;
+        return prev;
+    }
+    else
+    {
+        temp->next->next=curr;
+        temp->next=prev;
+        return A;
+    }
+}
